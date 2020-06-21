@@ -48,7 +48,7 @@ server.use('/session',sessionRoute);
 
 
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => console.log('MongoDB *> Database connection sucessfull!'));
+mongoose.connect('mongodb+srv://admin:lexicon007@cluster0-xitbp.mongodb.net/growactivity', { useNewUrlParser: true }, () => console.log('MongoDB *> Database connection sucessfull!'));
 mongoose.set('useCreateIndex', true);
 
 server.listen(PORT, () => console.log("API *> Api running..."));
