@@ -13,7 +13,10 @@ router.post('/',async(req,res)=>{
         res.json({ message: err})
     }
 });
-
+router.get('/get',async(req,res)=>{
+    
+    res.send("GW API 2")
+});
 router.post('/new', async (req,res)=>{
     const { id, title, description } = req.body;
     const activity = new Activity({
