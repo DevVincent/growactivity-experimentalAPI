@@ -15,7 +15,7 @@ router.post('/',async(req,res)=>{
 });
 router.get('/get',async(req,res)=>{
     
-    res.send("GW API 2")
+    res.send("this is amazing")
 });
 router.post('/new', async (req,res)=>{
     const { id, title, description } = req.body;
