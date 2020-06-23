@@ -14,6 +14,20 @@ router.post('/',async(req,res)=>{
     }
 });
 
+router.post('/goalsByWeek',async(req,res)=>{
+    const { id, startWeek, endWeek } = req.body;
+    try{      
+        const goals = await Goal.find({aId: id, 
+            date: {
+            $gte: startWeek,
+            $lte: endWeek
+          }},);
+        res.json(goals)
+    }catch(err){
+        res.json({ message: err})
+    }
+});
+
 router.post('/new', async (req,res)=>{
     const { aId, title, details, date, deadline } = req.body;
     const time = new Date().getTime;
