@@ -14,11 +14,27 @@ router.get('/',async(req,res)=>{
     }
 });
 
+router.post('/sessionsByWeek',async(req,res)=>{
+    const { id, startWeek, endWeek } = req.body;
+    try{      
+        const sessions = await Session.find({aId: id, 
+            date: {
+            $gte: startWeek,
+            $lte: endWeek
+          }},);
+        res.json(sessions)
+    }catch(err){
+        res.json({ message: err})
+    }
+});
+
 router.post('/new', async (req,res)=>{
-    const { id, body } = req.body;
+    const { id, date, numHrs } = req.body;
+    console.log(req.body)
     const session = new Session({
         aId: id,
-        body: body,
+        date: date,
+        numHrs: numHrs
     });
     try{
         const savedSession = await session.save()
