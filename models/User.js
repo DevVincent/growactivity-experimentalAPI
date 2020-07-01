@@ -17,7 +17,30 @@ const UserSchema = mongoose.Schema({
         type: String,
         required:true,
     },
-    avatar: String
+    avatar: {
+        type: String,
+        default: 'null'
+    },
+    joinedIn: { 
+        type: Date, 
+        default: Date.now
+    },
+    numActivities: {
+        type: Number,
+        default:0
+    },
+    numTasks: {
+        type: Number,
+        default: 0
+    },
+    numSessions: {
+        type: Number,
+        default:0
+    },
+    numHours: {
+        type: Number,
+        default:0
+    }
     //ADD PROFILE, SETTINGS....
 });
 
