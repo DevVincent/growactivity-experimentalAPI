@@ -10,11 +10,10 @@ const PORT = process.env.PORT || 3001;
 
 const server = express();
 server.use(bodyParser.json());
-
-server.use(cors({
+server.use(cors());
+/*server.use(cors({
     origin: 'http://growactivity.vincentms.me'
-}));
-
+}));*/
 server.use(session({
     secret: "Our little secret.",
     resave: false,
@@ -46,9 +45,8 @@ server.use('/goal',goalRoute);
 const sessionRoute = require('./routes/session');
 server.use('/session',sessionRoute);
 
-
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => console.log('MongoDB *> Database connection sucessfull!'));
+mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useFindAndModify: false }, () => console.log('MongoDB *> Database connection sucessfull!'));
 mongoose.set('useCreateIndex', true);
 
 server.listen(PORT, () => console.log("API *> Api running..."));
