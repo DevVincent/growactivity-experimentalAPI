@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Activity = require('../models/Activity');
-
 //Fetch Activities
 
 router.post('/',async(req,res)=>{
@@ -13,10 +12,7 @@ router.post('/',async(req,res)=>{
         res.json({ message: err})
     }
 });
-router.get('/get',async(req,res)=>{
-    
-    res.send("very surprised")
-});
+
 router.post('/new', async (req,res)=>{
     const { id, title, description } = req.body;
     const activity = new Activity({
@@ -24,8 +20,9 @@ router.post('/new', async (req,res)=>{
         title: title,
         description: description
     });
+    
     try{
-        const savedActivity = await activity.save()
+        const savedActivity = await activity.save()      
         res.json(savedActivity)
     }catch(err){
         res.json({message: err})

@@ -12,7 +12,83 @@ router.get('/',async(req,res)=>{
         res.json({ message: err})
     }
 });
-
+router.post('/addNumActivities', async (req,res)=>{
+    const { id } = req.body;
+    try{
+        User.findByIdAndUpdate(
+            { _id: id },
+            { $inc: { numActivities: 1 } },
+            function(err, result) {
+              if (err) {
+                res.send(err);
+              } else {
+                res.json(result)
+              }
+            }
+          );
+        }
+        catch(err){
+            res.json({message: err})
+        }
+});
+router.post('/addNumTasks', async (req,res)=>{
+    const { id } = req.body;
+    console.log(id)
+    try{
+        User.findByIdAndUpdate(
+            { _id: id },
+            { $inc: { numTasks: 1 } },
+            function(err, result) {
+              if (err) {
+                res.send(err);
+              } else {
+                res.json(result)
+              }
+            }
+          );
+        }
+        catch(err){
+            res.json({message: err})
+        }
+});
+router.post('/addNumSessions', async (req,res)=>{
+    const { id } = req.body;
+    try{
+        User.findByIdAndUpdate(
+            { _id: id },
+            { $inc: { numSessions: 1 } },
+            function(err, result) {
+              if (err) {
+                res.send(err);
+              } else {
+                res.json(result)
+              }
+            }
+          );
+        }
+        catch(err){
+            res.json({message: err})
+        }
+});
+router.post('/addNumHours', async (req,res)=>{
+    const { id } = req.body;
+    try{
+        User.findByIdAndUpdate(
+            { _id: id },
+            { $inc: { numHours: 1 } },
+            function(err, result) {
+              if (err) {
+                res.send(err);
+              } else {
+                res.json(result)
+              }
+            }
+          );
+        }
+        catch(err){
+            res.json({message: err})
+        }
+});
 router.post('/signUp', async (req,res)=>{
     const user = new User({
         username: req.body.username,

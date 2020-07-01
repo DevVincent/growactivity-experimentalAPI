@@ -16,7 +16,6 @@ router.post('/',async(req,res)=>{
 
 router.post('/new', async (req,res)=>{
     const { aId, tbody} = req.body;
-    console.log(req.body);
     const todo = new Todo({
         aId: aId,
         body: tbody,

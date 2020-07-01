@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Goal = require('../models/Goal');
 
-//Fetch todos
-
 router.post('/',async(req,res)=>{
     const { id } = req.body;
     try{      
@@ -30,8 +28,6 @@ router.post('/goalsByWeek',async(req,res)=>{
 
 router.post('/new', async (req,res)=>{
     const { aId, title, details, date, deadline } = req.body;
-    const time = new Date().getTime;
-    console.log(time);
     const goal = new Goal({
         aId: aId,
         title: title,
@@ -45,6 +41,25 @@ router.post('/new', async (req,res)=>{
     }catch(err){
         res.json({message: err})
     }
+});
+
+router.post('/addDeadline', async (req,res)=>{
+    const { Id, mDate } = req.body;
+    console.log(mDate)
+    
+    Goal.findByIdAndUpdate(
+        { _id: Id },
+        { deadline: mDate },
+        function(err, result) {
+          if (err) {
+            res.send(err);
+          } else {
+            res.json(result)
+            console.log(result)
+          }
+        }
+      );  
+       
 });
 
 router.delete('/:goalId', async (req,res)=>{
