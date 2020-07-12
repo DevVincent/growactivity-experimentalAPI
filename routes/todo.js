@@ -15,10 +15,10 @@ router.post('/',async(req,res)=>{
 });
 
 router.post('/new', async (req,res)=>{
-    const { aId, tbody} = req.body;
+    const { aId, body } = req.body;
     const todo = new Todo({
         aId: aId,
-        body: tbody,
+        body: body,
     });
     try{
         const savedTodo = await todo.save()

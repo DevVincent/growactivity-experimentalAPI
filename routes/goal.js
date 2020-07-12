@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Goal = require('../models/Goal');
+const Calendar = require('../models/Calendar');
 
 router.post('/',async(req,res)=>{
     const { id } = req.body;
     try{      
-        const goals = await Goal.find({aId: id},);
+        const goals = await Calendar.find({uId: id},);
         res.json(goals)
     }catch(err){
         res.json({ message: err})
@@ -15,7 +15,7 @@ router.post('/',async(req,res)=>{
 router.post('/goalsByWeek',async(req,res)=>{
     const { id, startWeek, endWeek } = req.body;
     try{      
-        const goals = await Goal.find({aId: id, 
+        const goals = await Calendar.find({uId: id, 
             date: {
             $gte: startWeek,
             $lte: endWeek
@@ -27,9 +27,9 @@ router.post('/goalsByWeek',async(req,res)=>{
 });
 
 router.post('/new', async (req,res)=>{
-    const { aId, title, details, date, deadline } = req.body;
-    const goal = new Goal({
-        aId: aId,
+    const { id, title, details, date, deadline } = req.body;
+    const goal = new Calendar({
+        uId: id,
         title: title,
         details: details,
         date: date,
@@ -47,7 +47,7 @@ router.post('/addDeadline', async (req,res)=>{
     const { Id, mDate } = req.body;
     console.log(mDate)
     
-    Goal.findByIdAndUpdate(
+    Calendar.findByIdAndUpdate(
         { _id: Id },
         { deadline: mDate },
         function(err, result) {
@@ -64,7 +64,7 @@ router.post('/addDeadline', async (req,res)=>{
 
 router.delete('/:goalId', async (req,res)=>{
     try{
-        const removedGoal = await Goal.deleteOne({_id: req.params.goalId})
+        const removedGoal = await Calendar.deleteOne({_id: req.params.goalId})
         res.json(removedGoal);
     }catch(err){
         res.json({message: err})

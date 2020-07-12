@@ -36,8 +36,11 @@ server.use('/activity',activityRoute);
 //todo
 const todoRoute = require('./routes/todo');
 server.use('/todo',todoRoute);
+//tasks
+const taskRoute = require('./routes/task');
+server.use('/task',taskRoute);
 
-//goal
+//goals for the calendar
 const goalRoute = require('./routes/goal');
 server.use('/goal',goalRoute);
 
